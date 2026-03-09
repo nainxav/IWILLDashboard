@@ -49,8 +49,10 @@ export default function TeamPage({ params }: { params: Promise<{ team: string }>
                                 alt={`${team.name} logo`}
                                 fill
                                 className="object-contain p-2"
+                                unoptimized
                                 onError={(e) => {
-                                    e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(team.name)}&background=random&size=64`;
+                                    const target = e.target as HTMLImageElement;
+                                    target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(team.name)}&background=random&size=64&font-size=0.35&bold=true`;
                                 }}
                             />
                         </div>
@@ -70,7 +72,7 @@ export default function TeamPage({ params }: { params: Promise<{ team: string }>
 
                 {/* Members Section */}
                 {team.members.length > 0 ? (
-                    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    <div key={teamSlug} className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                         {team.members.map((member, index) => (
                             <MemberCard 
                                 key={member.slug}
@@ -107,7 +109,7 @@ function MemberCard({ member, teamSlug, index }: MemberCardProps) {
     return (
         <motion.div
             initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
+            animate={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
             whileHover={{ y: -5 }}
@@ -141,8 +143,10 @@ function MemberCard({ member, teamSlug, index }: MemberCardProps) {
                                         alt={member.name}
                                         fill
                                         className="object-cover"
+                                        unoptimized
                                         onError={(e) => {
-                                            e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=random&size=80`;
+                                            const target = e.target as HTMLImageElement;
+                                            target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=random&size=80&font-size=0.35`;
                                         }}
                                     />
                                 </div>
@@ -151,7 +155,7 @@ function MemberCard({ member, teamSlug, index }: MemberCardProps) {
                     </div>
 
                     <div className="flex flex-wrap gap-2 mb-4">
-                        {member.tags.map((tag) => (
+                        {(member.tags || []).map((tag) => (
                             <span key={tag} className="text-[10px] px-2 py-1 bg-background border border-foreground/30">
                                 #{tag}
                             </span>

@@ -39,8 +39,10 @@ export default function ArsenalPage() {
                                     alt={`${team.name} logo`}
                                     fill
                                     className="object-contain p-1"
+                                    unoptimized
                                     onError={(e) => {
-                                        e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(team.name)}&background=random&size=64`;
+                                        const target = e.target as HTMLImageElement;
+                                        target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(team.name)}&background=random&size=64&font-size=0.35&bold=true`;
                                     }}
                                 />
                             </div>

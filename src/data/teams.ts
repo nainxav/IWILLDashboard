@@ -993,7 +993,7 @@ export const teams: Team[] = [
             {
                 slug: "angeline",
                 name: "Angeline",
-                photo: "/members/angel.png",
+                photo: "/members/angel.jpg",
                 role: "IoT Hardware Interfacer",
                 status: "ACTIVE",
                 email: "angeline@iwill-lab.com",

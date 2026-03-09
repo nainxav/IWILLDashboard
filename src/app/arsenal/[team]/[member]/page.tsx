@@ -32,6 +32,7 @@ export default function MemberPage({ params }: { params: Promise<{ team: string;
 
                 {/* Header Section */}
                 <motion.div
+                    key={`${teamSlug}-${memberSlug}`}
                     initial={{ y: 30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     className="bg-background border-4 border-black dark:border-white p-6 shadow-pixel"
@@ -44,8 +45,10 @@ export default function MemberPage({ params }: { params: Promise<{ team: string;
                                 alt={member.name}
                                 fill
                                 className="object-cover"
+                                unoptimized
                                 onError={(e) => {
-                                    e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=random&size=128`;
+                                    const target = e.target as HTMLImageElement;
+                                    target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=random&size=128&font-size=0.35`;
                                 }}
                             />
                         </div>
